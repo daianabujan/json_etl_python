@@ -51,37 +51,42 @@ if __name__ == '__main__':
 
     response = requests.get(url)
     dataset = response.json()
-  
-    
+
     filtrado = [{"userId": x["userId"] , "completed": x["completed"]} for x in dataset]
-    #print(json.dumps(filtrado, indent=4))
+    print(json.dumps(filtrado, indent=4))
 
-    data = {}
-    suma = 1
+    conteo = {}
 
-    for i in range(len(filtrado)):
-        variable = filtrado[i]
-        userid = variable["userId"]
-        completo = variable["completed"]       
-        
-        if completo == True:
-            if data[userid] == 1:
-                data[userid] += suma
-
+    for datos in filtrado:
+        if datos["completed"] == True:
+            if datos["userId"] in conteo.keys():
+                conteo[datos["userId"]] += 1
             else:
-                data[userid] = 1
-        
+                conteo[datos["userId"]] = 1
 
-        #if completo == True:    
-            #data[userid] += 1
-            
-            
-        #if completo == True:
-            #data[userid] =  data[userid] + suma
+    print(json.dumps(conteo,indent=4))     
 
-
-        #if completo == True:
-            #data[userid] = 0
-        #data[userid] =  data[userid] + suma        
+    fig = plt.figure()
+    fig.suptitle('Usuarios y libros leidos', fontsize = 18)
+    ax = fig.add_subplot()
     
+    ax.bar(conteo.keys(), conteo.values())
+    ax.grid(c = 'navy', ls = 'dotted')
+    ax.set_facecolor('aliceblue')
+    ax.set_ylabel('Libros leidos')
+    ax.set_xlabel('Usuarios')
+
+    plt.show()
+
+
+    #    fig.suptitle('Titulos completados por usuario', fontsize=15, label='usuarios')
+    #    ax = fig.add_subplot()
+
+     #   ax.bar(recuento.keys(), recuento.values())
+      #  ax.legend()
+       # ax.grid()
+        #plt.show()
+    print("terminamos")
+
+
     print("terminamos")
