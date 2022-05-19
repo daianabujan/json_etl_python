@@ -8,6 +8,9 @@
 # que aparecen en verde con el hashtag "#"
 
 import json
+from re import X
+from numpy import NaN
+from pkg_resources import yield_lines
 import requests
 
 import matplotlib.pyplot as plt
@@ -46,4 +49,39 @@ if __name__ == '__main__':
     # y verifique si los primeros usuarios (mirando la página a ojo)
     # los datos recolectados son correctos.
 
+    response = requests.get(url)
+    dataset = response.json()
+  
+    
+    filtrado = [{"userId": x["userId"] , "completed": x["completed"]} for x in dataset]
+    #print(json.dumps(filtrado, indent=4))
+
+    data = {}
+    suma = 1
+
+    for i in range(len(filtrado)):
+        variable = filtrado[i]
+        userid = variable["userId"]
+        completo = variable["completed"]       
+        
+        if completo == True:
+            if data[userid] == 1:
+                data[userid] += suma
+
+            else:
+                data[userid] = 1
+        
+
+        #if completo == True:    
+            #data[userid] += 1
+            
+            
+        #if completo == True:
+            #data[userid] =  data[userid] + suma
+
+
+        #if completo == True:
+            #data[userid] = 0
+        #data[userid] =  data[userid] + suma        
+    
     print("terminamos")
