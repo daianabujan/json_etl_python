@@ -78,15 +78,4 @@ if __name__ == '__main__':
 
     plt.show()
 
-
-    #    fig.suptitle('Titulos completados por usuario', fontsize=15, label='usuarios')
-    #    ax = fig.add_subplot()
-
-     #   ax.bar(recuento.keys(), recuento.values())
-      #  ax.legend()
-       # ax.grid()
-        #plt.show()
-    print("terminamos")
-
-
     print("terminamos")
